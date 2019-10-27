@@ -1,6 +1,6 @@
 <?php
 \Magento\Framework\Component\ComponentRegistrar::register(
 	\Magento\Framework\Component\ComponentRegistrar::MODULE, 
-	'Whidegroup_Lastupdated', 
+	'Pronko_Magento2Module', 
 	__DIR__
 );

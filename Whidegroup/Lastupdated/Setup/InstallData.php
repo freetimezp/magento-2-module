@@ -6,6 +6,7 @@ use Magento\Catalog\Setup\CategorySetup;
 use Magento\Catalog\Setup\CategorySetupFactory;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 
+
 $categorySetup = $this->categorySetupFactory->create(['setup' => $this->moduleDataSetup]);
 
 $attributeSetId = $categorySetup->getDefaultAttributeSetId(\Magento\Catalog\Model\Product::ENTITY);
@@ -18,7 +19,7 @@ $categorySetup->addAttributeGroup(
 
 $categorySetup->addAttribute(
     \Magento\Catalog\Model\Product::ENTITY,
-    'last_updated',
+    'lastupdated',
     [
         'type' => 'text',
         'label' => 'Last updated',
@@ -32,6 +33,6 @@ $categorySetup->addAttribute(
         'is_visible_in_grid' => false,
         'is_filterable_in_grid' => false,
         'is_visible_on_front' => true,
-        'default' => 'Hello World'
+        'default' => 'New custom attribute Lastupdated'
     ]
 );
