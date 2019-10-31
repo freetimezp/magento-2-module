@@ -2,37 +2,73 @@
 
 namespace Whidegroup\Lastupdated\Setup;
 
-use Magento\Catalog\Setup\CategorySetup;
-use Magento\Catalog\Setup\CategorySetupFactory;
+use Magento\Customer\Api\AddressMetadataInterface;
+use Magento\Eav\Setup\EavSetup;
+use Magento\Eav\Model\Config;
+use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\Setup\ModuleContextInterface;
 
+class InstallData implements InstallDataInterface
+{
+    /*
+    *** Attribute code for Custom Attribute
+    */
+    const CUSTOM_ATTRIBUTE_CODE = 'lastupdated';
 
-$categorySetup = $this->categorySetupFactory->create(['setup' => $this->moduleDataSetup]);
+    /*
+    *** @var EavSetup
+    */
+    private $eavSetup;
 
-$attributeSetId = $categorySetup->getDefaultAttributeSetId(\Magento\Catalog\Model\Product::ENTITY);
-$categorySetup->addAttributeGroup(
-    \Magento\Catalog\Model\Product::ENTITY,
-    $attributeSetId,
-    'Last updated',
-    115
-);
+ /*
+    *** @var Config
+    */
+    private $eavConfig;
 
-$categorySetup->addAttribute(
-    \Magento\Catalog\Model\Product::ENTITY,
-    'lastupdated',
-    [
-        'type' => 'text',
-        'label' => 'Last updated',
-        'input' => 'textarea',
-        'source' => \Magento\Catalog\Model\Product\Attribute\Source\Layout::class,
-        'required' => false,
-        'sort_order' => 10,
-        'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_STORE,
-        'group' => 'Content',
-        'is_used_in_grid' => true,
-        'is_visible_in_grid' => false,
-        'is_filterable_in_grid' => false,
-        'is_visible_on_front' => true,
-        'default' => 'New custom attribute Lastupdated'
-    ]
-);
+    /*
+    *** InstallData constructor
+    *** @param EavSetup $eavSetup
+    *** Config $config
+    */
+    public function __construct(
+        EavSetup $eavSetup,
+        Config $config
+    )   {
+        $this->eavSetup = $eavSetup; 
+        $this->eavConfig = $config;
+    }
+
+ public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context) 
+ {
+    $setup->startSetup();
+
+    $this->eavSetup->addAttribute(
+        AddressMetadataInterface::ENTITY_TYPE_ADDRESS,
+        self::CUSTOM_ATTRIBUTE_CODE,
+        [
+            'label' => 'lastupdated',
+            'input' => 'text',
+            'visible' => true,
+            'required' => false,
+            'position' => 160,
+            'sort_order' => 160,
+            'system' => false
+        ]
+    );
+
+    $customAttribute = $this->eavConfig->getAttribute(
+        AddressMetadataInterface::ENTITY_TYPE_ADDRESS,
+        self::CUSTOM_ATTRIBUTE_CODE
+    );
+
+    $customAttribute->setData(
+        'used_in_forms',
+        ['adminhtml_customer_address', 'customer_address_edit', 'customer_register_address']
+    );
+
+    $customAttribute->save();
+
+    $setup->endSetup();
+ }
+}
