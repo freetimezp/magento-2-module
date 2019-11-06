@@ -2,73 +2,52 @@
 
 namespace Whidegroup\Lastupdated\Setup;
 
-use Magento\Customer\Api\AddressMetadataInterface;
 use Magento\Eav\Setup\EavSetup;
-use Magento\Eav\Model\Config;
+use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 
 class InstallData implements InstallDataInterface
 {
-    /*
-    *** Attribute code for Custom Attribute
-    */
     const CUSTOM_ATTRIBUTE_CODE = 'lastupdated';
 
-    /*
-    *** @var EavSetup
-    */
-    private $eavSetup;
+    private $eavSetupFactory;
 
- /*
-    *** @var Config
-    */
-    private $eavConfig;
-
-    /*
-    *** InstallData constructor
-    *** @param EavSetup $eavSetup
-    *** Config $config
-    */
-    public function __construct(
-        EavSetup $eavSetup,
-        Config $config
-    )   {
-        $this->eavSetup = $eavSetup; 
-        $this->eavConfig = $config;
+    public function __construct(EavSetupFactory $eavSetupFactory)
+    {
+        $this->eavSetupFactory = $eavSetupFactory;
     }
 
- public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context) 
- {
-    $setup->startSetup();
+    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context) 
+    {
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
 
-    $this->eavSetup->addAttribute(
-        AddressMetadataInterface::ENTITY_TYPE_ADDRESS,
-        self::CUSTOM_ATTRIBUTE_CODE,
-        [
-            'label' => 'lastupdated',
-            'input' => 'text',
-            'visible' => true,
-            'required' => false,
-            'position' => 160,
-            'sort_order' => 160,
-            'system' => false
-        ]
-    );
+        $eavSetup->addAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            self::CUSTOM_ATTRIBUTE_CODE,
+            [
+                'type' => 'varchar',
+                'label' => 'lastupdated',
+                'input' => 'text',
+                'visible' => true,
+                'required' => false,
+                'class' => '',
+                'source' => '',
+                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                'backend'  => '',
+                'frontend'  => '',
+                'default' => '',
+                'searchable' => false,
+                'filterable' => false,
+                'comparable' => false,
+                'visible_on_front' => false,
+                'used_in_product_listing' => true,
+                'unique' => false,
+                'user_defined' => true,
+                'system' => false
+            ]
+        );
 
-    $customAttribute = $this->eavConfig->getAttribute(
-        AddressMetadataInterface::ENTITY_TYPE_ADDRESS,
-        self::CUSTOM_ATTRIBUTE_CODE
-    );
-
-    $customAttribute->setData(
-        'used_in_forms',
-        ['adminhtml_customer_address', 'customer_address_edit', 'customer_register_address']
-    );
-
-    $customAttribute->save();
-
-    $setup->endSetup();
- }
+    }
 }
