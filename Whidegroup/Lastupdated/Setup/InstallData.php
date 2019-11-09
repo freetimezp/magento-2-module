@@ -35,6 +35,7 @@ class InstallData implements InstallDataInterface
                 'class' => '',
                 'source' => '',
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                'group' => 'General', // product attribute and assigned it all attribute set
                 'backend'  => '',
                 'frontend'  => '',
                 'default' => '',
