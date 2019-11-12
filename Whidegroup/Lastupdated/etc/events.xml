@@ -2,9 +2,7 @@
 <config 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="whidegroup_lustupdated_date_product">
-        <observer 
-        	name="wl_lustupdated_date_product" 
-        	instance="Whidegroup\Lastupdated\Observer\LastupdateDateProduct" />
+    <event name="catalog_product_save_before">
+        <observer name="lastupdated_productsave" instance="Whidegroup\Lastupdated\Observer\ProductSaveBefore" />
     </event>
 </config>
