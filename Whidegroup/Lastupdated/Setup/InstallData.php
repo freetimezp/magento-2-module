@@ -38,7 +38,7 @@ class InstallData implements InstallDataInterface
                 'group' => 'General', // product attribute and assigned it all attribute set
                 'backend'  => '',
                 'frontend'  => '',
-                'default' => '',
+                'default' => 'some default value',
                 'searchable' => false,
                 'filterable' => false,
                 'comparable' => false,
