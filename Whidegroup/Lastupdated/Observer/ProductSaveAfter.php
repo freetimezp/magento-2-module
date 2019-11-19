@@ -8,15 +8,16 @@ class ProductSaveAfter implements ObserverInterface
 {
   public function execute(\Magento\Framework\Event\Observer $observer)
    {
-        $newValue = 'Some new value';
+        $timezone = date_default_timezone_get();
+        $date_today = date("d/m/Y H:i:s ");
+        $newValue = $date_today . $timezone;
 
         $product = $observer->getProduct();
 
         $oldValue = $product->getLastupdated();
-
         $product->setLastupdated($newValue);
-
         $product->getResource()->saveAttribute($product, 'lastupdated');
+
 
         // $product = $observer->getProduct();
         // $orgprice = $product->getPrice();
