@@ -8,16 +8,34 @@ use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 
+use Magento\Cms\Model\Page;
+use Magento\Cms\Model\PageFactory;
+
+use Magento\Cms\Model\BlockFactory;
+use Magento\Cms\Model\BlockRepository;
+
 class InstallData implements InstallDataInterface
 {
     const CUSTOM_ATTRIBUTE_CODE = 'lastupdated';
-
     private $eavSetupFactory;
 
-    public function __construct(EavSetupFactory $eavSetupFactory)
+				protected $blockFactory;
+				protected $blockRepository;
+
+    public function __construct(
+    	EavSetupFactory $eavSetupFactory,
+     PageFactory $resultPageFactory,
+     \Magento\Cms\Model\BlockFactory $blockFactory,
+     \Magento\Cms\Model\BlockRepository $blockRepository
+    )
     {
         $this->eavSetupFactory = $eavSetupFactory;
+        $this->resultPageFactory = $resultPageFactory;
+        $this->blockFactory = $blockFactory;
+        $this->blockRepository = $blockRepository;
     }
+
+
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context) 
     {
@@ -49,6 +67,16 @@ class InstallData implements InstallDataInterface
                 'system' => false
             ]
         );
+
+    $data = [
+				    'title' => 'Test block title',
+				    'identifier' => 'test-block',
+				    'stores' => ['0'],
+				    'is_active' => 1,
+				    'content' => 'Test block content'
+				];
+				$newBlock = $this->blockFactory->create(['data' => $data]);
+				$this->blockRepository->save($newBlock);
 
     }
 }
