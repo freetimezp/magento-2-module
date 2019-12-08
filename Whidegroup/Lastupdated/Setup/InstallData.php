@@ -23,7 +23,7 @@ class InstallData implements InstallDataInterface
 				protected $blockRepository;
 
     public function __construct(
-    	EavSetupFactory $eavSetupFactory,
+     EavSetupFactory $eavSetupFactory,
      PageFactory $resultPageFactory,
      \Magento\Cms\Model\BlockFactory $blockFactory,
      \Magento\Cms\Model\BlockRepository $blockRepository
