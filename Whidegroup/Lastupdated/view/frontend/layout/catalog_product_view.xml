@@ -6,7 +6,7 @@
 		 <body>
 		    <referenceBlock name="product.info.main">
 		        <block 
-		         	class="Whidegroup\Lastupdated\Block\newblock" 
+		         	class="Whidegroup\Lastupdated\Block\Newblock" 
 		         	name="product.new.block"
 		         	template="Whidegroup_Lastupdated::newblock.phtml">
 		        </block>
