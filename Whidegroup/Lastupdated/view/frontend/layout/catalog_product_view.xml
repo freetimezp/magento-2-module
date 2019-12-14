@@ -7,24 +7,16 @@
 		    <referenceBlock name="product.info.main">
 		        <block 
 		         	class="Whidegroup\Lastupdated\Block\Newblock" 
-		         	name="product.new.block"
-		         	template="Whidegroup_Lastupdated::newblock.phtml">
+		         	name="product.info.newblock"
+		         	template="Whidegroup_Lastupdated::newblock.phtml"
+		         	before="-">
 		        </block>
 		    </referenceBlock>
+		    <move 
+		    	element="product.info.newblock" 
+		    	destination="product.info.main" 
+		    	after="page.main.title" />
 		 </body>
 </page>
 
-<!-- <?xml version="1.0"?>
-		<page 
-			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-			xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-		    <body>
-		        <referenceBlock name="product.info.form.content">
-		           <block 
-		            	class="Whidegroup\Lastupdated\Block\Catalog\Product\View\Lastupdatedblock" 
-		            	name="catalog.product.view.lastupdatedblock" 
-		            	template="Whidegroup_Lastupdated::catalog/product/view/file.phtml">
-		           </block>
-		        </referenceBlock>
-		    </body>
-		</page> -->
+ 
