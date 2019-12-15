@@ -1,5 +1,11 @@
-<?php 
+<p>
+ The product was last updated on 
+ <?php
+		 $_product = $block->getProduct();
+		 $myattribute = $_product->getResource()->getAttribute('lastupdated')->getFrontend()->getValue($_product);
+ 		echo $myattribute;
+ ?>
+</p>
 
-?>
 
-<h1>New block asdas title</h1>
+
