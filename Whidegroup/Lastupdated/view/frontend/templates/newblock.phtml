@@ -1,11 +1,22 @@
 <p>
- The product was last updated on 
- <?php
-		 $_product = $block->getProduct();
-		 $myattribute = $_product->getResource()->getAttribute('lastupdated')->getFrontend()->getValue($_product);
- 		echo $myattribute;
- ?>
+	 The product was last updated on 
+				<?php 
+
+					$OM = \Magento\Framework\App\ObjectManager::getInstance();  
+					$registry = $OM->get('\Magento\Framework\Registry'); 
+					$currentProduct = $registry->registry('current_product');
+
+					if($currentProduct)
+					{
+					   //echo $currentProduct->getName() . '<br />';
+					   //echo $currentProduct->getSku() . '<br />';
+					   echo $currentProduct->getResource()->getAttribute('lastupdated')->getFrontend()->getValue($currentProduct);;
+					}  
+				?>
 </p>
+
+
+
 
 
 
