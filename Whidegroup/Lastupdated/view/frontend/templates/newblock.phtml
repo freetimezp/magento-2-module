@@ -10,8 +10,13 @@
 					{
 					   //echo $currentProduct->getName() . '<br />';
 					   //echo $currentProduct->getSku() . '<br />';
-					   echo $currentProduct->getResource()->getAttribute('lastupdated')->getFrontend()->getValue($currentProduct);;
-					}  
+					  $newValueCP = $currentProduct->getResource()->getAttribute('lastupdated')->getFrontend()->getValue($currentProduct);
+					  if($newValueCP != null) {
+					  	echo $newValueCP;
+					  } else {
+					  	echo ",sorry, product is out off date!";
+					  }
+					} 
 				?>
 </p>
 
