@@ -3,10 +3,14 @@
 	  layout="1column"
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+			<head>
+    <css src="Whidegroup_Lastupdated::style.css" />
+    <link src="Whidegroup_Lastupdated::less.js" />
+   </head> 
 		 <body>
 		    <referenceBlock name="product.info.main">
 		        <block 
-		         	class="Whidegroup\Lastupdated\Block\Newblock" 
+		         	class="Whidegroup\Lastupdated\Block\Newblock"
 		         	name="product.info.newblock"
 		         	template="Whidegroup_Lastupdated::newblock.phtml"
 		         	before="-">
