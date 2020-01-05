@@ -8,8 +8,7 @@
 
 					if($currentProduct)
 					{
-					   //echo $currentProduct->getName() . '<br />';
-					   //echo $currentProduct->getSku() . '<br />';
+
 					  $newValueCP = $currentProduct->getResource()->getAttribute('lastupdated')->getFrontend()->getValue($currentProduct);
 					  if($newValueCP != null) {
 					  	echo $newValueCP;

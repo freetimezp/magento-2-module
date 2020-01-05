@@ -4,8 +4,7 @@
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 			<head>
-    <css src="Whidegroup_Lastupdated::style.css" />
-    <link src="Whidegroup_Lastupdated::less.js" />
+    <css src="Whidegroup_Lastupdated::css/style.css" />
    </head> 
 		 <body>
 		    <referenceBlock name="product.info.main">
